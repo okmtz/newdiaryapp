@@ -33,6 +33,7 @@ class ContentController extends Controller
         $contents = Content::where('user_id', $user->id)->get();
         return view('contents.show', compact('contents'));
     }
+    
 
     //
 }
