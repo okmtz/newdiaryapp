@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\User;
 use App\Content;
+use App\Memo;
 
 
 
@@ -40,7 +41,8 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
-        return view('posts.show', compact('post'));
+        $memos = Memo::where('post_id',$post->id)->get();
+        return view('posts.show', compact('post', 'memos'));
     }
 
    

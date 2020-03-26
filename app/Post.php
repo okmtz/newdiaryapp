@@ -11,6 +11,9 @@ class Post extends Model
         'title',
         'content',
     ];
+    public function memos() {
+        return $this->hasMany('App\Memo');
+    }
   
     //
 }
