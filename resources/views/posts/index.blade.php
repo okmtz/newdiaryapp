@@ -5,4 +5,7 @@
     <p>{{$post->title}}</p>
     <p>content</p>
     <p>{{$post->content}}</p>
+    <a href="{{action('PostController@show',$post->id)}}">詳細はこちら</a>
+   
+
 @endforeach  
