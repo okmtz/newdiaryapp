@@ -16,14 +16,13 @@ class PostController extends Controller
     {
         $id = $request->query('id');
         $posts = Post::where('content_id',$id)->get();
-        return view('posts.index', compact('posts'));
+        return view('posts.index', compact('posts','id'));
         
     }
     public function create(Request $request)
     {
-        $content_id = $request->id;
-        $content = Content::findOrFail($content_id)->first();
-        return view('posts.create', compact('content'));
+        $content_id = $request->query('id');
+        return view('posts.create', compact('content_id'));
     }
     public function store(Request $request)
     {
@@ -35,8 +34,7 @@ class PostController extends Controller
         $content = Content::findOrFail($params["content_id"]);
         $content->posts()->create($params);
         $id = $content->id;
-        $posts = Post::findOrFail($id);
-
+        $posts = Post::findOrFail($id)->get();
         return view('posts.index', compact('posts', 'id'));
     }
 
