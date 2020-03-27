@@ -39,6 +39,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
+
         $memos = Memo::where('post_id', $post->id)->get();
         return view('posts.show', compact('post', 'memos'));
     }
@@ -67,7 +68,7 @@ class PostController extends Controller
         $post->delete();
         $posts = Post::where('content_id', $id)->get();
         return view('posts.index', compact('posts', 'id'));
-    }
+  }
 
    
 
