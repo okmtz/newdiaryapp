@@ -1,4 +1,9 @@
-<a href="{{action('PostController@edit', $post)}}">
+<a href="{{action('PostController@edit', $post)}}">投稿を編集する</a>
+<form method="POST" action="{{action('PostController@destroy', $post)}}">
+    @csrf
+    @method('DELETE')
+    <button type="submit">delete</button>
+</form>
 <p>title</p>
 <p>{{$post->title}}</p>
 <p>content</p>

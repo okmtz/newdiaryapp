@@ -21,4 +21,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/contents', 'ContentController');
 Route::resource('/posts', 'PostController');
 Route::resource('/memos', 'MemoController');
+Route::get('/posts', 'PostController@index')->name('posts');
 

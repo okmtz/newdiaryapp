@@ -34,21 +34,39 @@ class PostController extends Controller
         ]);
         $content = Content::findOrFail($params["content_id"]);
         $content->posts()->create($params);
-        $id = $content->id;
-        $posts = Post::findOrFail($id)->get();
-        return view('posts.index', compact('posts', 'id'));
+        return redirect()->route('posts', ['id' => $content->id]);
     }
     public function show($id)
     {
         $post = Post::findOrFail($id);
-        $memos = Memo::where('post_id',$post->id)->get();
+        $memos = Memo::where('post_id', $post->id)->get();
         return view('posts.show', compact('post', 'memos'));
     }
-    public function edit(Request $request)
+    public function edit($post)
     {
-        $id = $request->id;
-        $post = Post::findOrFail($id);
-        return view('posts.edit', compact('post'))  ;
+        $post = Post::findOrFail($post);
+        return view('posts.edit', compact('post'));
+    }
+    public function update($post, Request $request)
+    {
+        $params = $request->validate([
+            'title' => 'required|max:50',
+            'content' => 'required|max:2000',
+        ]);
+        $post = Post::findOrFail($post);
+        $post->fill($params)->save();
+        $post = Post::findOrFail($post->id);
+        $memos = Memo::where('post_id', $post->id)->get();
+        return view('posts.show', compact('post', 'memos'));
+    }
+    public function destroy($post)
+    {
+        $post = Post::findOrFail($post);
+        $id = $post->content_id;
+        $post->memos()->delete();
+        $post->delete();
+        $posts = Post::where('content_id', $id)->get();
+        return view('posts.index', compact('posts', 'id'));
     }
 
    

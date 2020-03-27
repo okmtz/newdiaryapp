@@ -15,8 +15,8 @@ class MemoController extends Controller
             'content' => 'required|max:200',
         ]);
         $post = Post::findOrFail($params['post_id']);
-        $memos = Memo::where('post_id', $params['post_id'])->get();
         $post->memos()->create($params);
+        $memos = Memo::where('post_id', $params['post_id'])->get();
         $post = Post::findOrFail($params['post_id']);
         return view('posts.show', compact('post','memos'));
 
