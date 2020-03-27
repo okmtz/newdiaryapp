@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Content;
+use App\Post;
 
 class ContentController extends Controller
 {    
@@ -30,8 +31,21 @@ class ContentController extends Controller
         ]);
         $user = User::findOrFail($params['user_id']);
         $user->contents()->create($params);
-        $contents = Content::where('user_id', $user->id)->get();
-        return view('contents.show', compact('contents'));
+        return redirect()->route('contents');
+    }
+    public function destroy($content)
+    {
+        $content = Content::findOrFail($content);
+        $posts = Post::where('content_id', $content->id)->get();
+
+        foreach ($posts as $post) {
+            $post->memos()->delete();
+        };
+        $content->posts()->delete();
+        $content->delete();
+        return redirect()->route('contents');
+
+
     }
     
 

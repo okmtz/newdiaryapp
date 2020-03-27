@@ -18,4 +18,4 @@
     <textarea name="content" placeholder="メモを入力してください"></textarea>
     <button type="submit">Submit</button>
 </form>
-@endforeach
+
