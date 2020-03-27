@@ -44,6 +44,12 @@ class PostController extends Controller
         $memos = Memo::where('post_id',$post->id)->get();
         return view('posts.show', compact('post', 'memos'));
     }
+    public function edit(Request $request)
+    {
+        $id = $request->id;
+        $post = Post::findOrFail($id);
+        return view('posts.edit', compact('post'))  ;
+    }
 
    
 
