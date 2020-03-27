@@ -39,7 +39,6 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
-
         $memos = Memo::where('post_id', $post->id)->get();
         return view('posts.show', compact('post', 'memos'));
     }
@@ -56,9 +55,7 @@ class PostController extends Controller
         ]);
         $post = Post::findOrFail($post);
         $post->fill($params)->save();
-        $post = Post::findOrFail($post->id);
-        $memos = Memo::where('post_id', $post->id)->get();
-        return view('posts.show', compact('post', 'memos'));
+        return redirect()->route('posts', ['id' => $post->id]);
     }
     public function destroy($post)
     {
@@ -66,8 +63,7 @@ class PostController extends Controller
         $id = $post->content_id;
         $post->memos()->delete();
         $post->delete();
-        $posts = Post::where('content_id', $id)->get();
-        return view('posts.index', compact('posts', 'id'));
+        return redirect()->route('posts', ['id' => $id]);
   }
 
    
