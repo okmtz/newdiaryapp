@@ -1,4 +1,5 @@
-<a href="{{action('PostController@edit', $post)}}">投稿を編集する</a>
+<a href="{{ action('PostController@edit', $post) }}">投稿を編集する</a>
+<a href="{{ action('PostController@index', ['id' => $post->content_id]) }}">投稿の一覧に戻る</a>
 <form method="POST" action="{{action('PostController@destroy', $post)}}">
     @csrf
     @method('DELETE')

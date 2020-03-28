@@ -1,3 +1,4 @@
+<a href="{{ action('PostController@index', ['id' => $content_id]) }}">投稿の一覧に戻る</a>
 <form method="POST" action="{{ action('PostController@store') }}">
     @csrf
     <input type="hidden" name="content_id" value="{{ $content_id }}">
