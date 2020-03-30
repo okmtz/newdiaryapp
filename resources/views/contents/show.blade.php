@@ -33,37 +33,40 @@
             </ul>
         </header>
         <div class="container mt-5">
-            <div class="row row-cols-3">
-            @foreach($contents as $content)
-                <div class="col mb-6">
-                    <div class="card bg-light mb-3">
-                        <div class="card-header">
-                        @php
-                            $post = $content->posts()->orderBy('content', 'desc')->first();
-                            $post= optional($post);
-                        @endphp
-                                {{ "latest posts : " . $post->updated_at }}
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $content->name }}</h5>
-                            <p class="card-text">
-                            {{ 'This is ' . $content->name  }} <br>
-                            {{ 'now here are ' . $content->posts()->get()->count() . 'posts.' }}
-                            </p>
-                            <div class="text-right">
-                                <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-outline-secondary mr-1" onclick="location.href='{{action('PostController@index', ['id' => $content->id])}}'">Go</button>
-                                    <form method="POST" action="{{ action('ContentController@destroy', $content) }}">
-                                        @csrf 
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-outline-secondary">Delete</button>
-                                    </form>
+            <div class="row col-auto">
+                @foreach($contents as $content)
+                    <div class="col mb-6">
+                        <div class="card bg-light mb-3">
+                            <div class="card-header">
+                            @php
+                                $post = $content->posts()->orderBy('content', 'desc')->first();
+                                $post= optional($post);
+                            @endphp
+                                    {{ "latest posts : " . $post->updated_at }}
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $content->name }}</h5>
+                                <p class="card-text">
+                                {{ 'This is ' . $content->name  }} <br>
+                                {{ 'now here are ' . $content->posts()->get()->count() . 'posts.' }}
+                                </p>
+                                <div class="text-right">
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-outline-secondary mr-1" onclick="location.href='{{action('PostController@index', ['id' => $content->id])}}'">Go</button>
+                                        <form method="POST" action="{{ action('ContentController@destroy', $content) }}">
+                                            @csrf 
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-outline-secondary">Delete</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
+            <div class="d-flex justify-content-center">
+                {{ $contents->links() }}
             </div>
         </div>
     </body>

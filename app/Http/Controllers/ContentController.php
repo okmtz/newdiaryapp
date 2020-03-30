@@ -14,11 +14,11 @@ class ContentController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         $user = Auth::user();
-        $contents = Content::where('user_id', $user->id)->get();
+        $contents = Content::where('user_id', $user->id)->paginate(10);
         return view('contents.show', compact('contents'));
     }
 
