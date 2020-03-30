@@ -53,6 +53,9 @@
                 @endforeach
             </div>
         </div>
+        <div class="d-flex justify-content-center">
+            {{ $posts->appends(['id' => $content->id])->links() }}
+        </div>
     </body>
 </html>
 

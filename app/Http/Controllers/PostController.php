@@ -17,12 +17,13 @@ class PostController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index(Request $request)
     {
         $id = $request->query('id');
-        $posts = Post::where('content_id',$id)->get();
-        return view('posts.index', compact('posts','id'));
+        $posts = Post::where('content_id',$id)->orderBy('created_at', 'desc')->paginate(5);
+        $content = Content::findOrFail($id);
+        return view('posts.index', compact('content', 'posts', 'id'));
         
     }
     public function create(Request $request)
