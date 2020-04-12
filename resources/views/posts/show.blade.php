@@ -23,7 +23,7 @@
     <body>
         <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <h5 class="text-align-left mt-3 ml-3">{{ $post->id }}</h3>
+                <h5 class="text-align-left mt-3 ml-3">{{ "id : " . $post->id }}</h3>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto mr-3">
                         <li class="nav-item">
