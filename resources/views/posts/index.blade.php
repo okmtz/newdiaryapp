@@ -41,6 +41,7 @@
         </header>
         <div class="container">
             <div class="row-cols-1 mt-5">
+            @if (count($posts) !== 0)
                 @foreach( $posts as $post )
                 <div class="card mb-2">
                     <div class="card-header">
@@ -51,6 +52,9 @@
                     </div>
                 </div>
                 @endforeach
+            @else
+                <p class="mt-5"style="font-size: x-large">No Post</p>
+            @endif
             </div>
         </div>
         <div class="d-flex justify-content-center">
