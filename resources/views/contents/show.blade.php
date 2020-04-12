@@ -34,6 +34,7 @@
         </header>
         <div class="container mt-5">
             <div class="row col-auto">
+            @if (count($contents) !== 0)
                 @foreach($contents as $content)
                     <div class="col mb-6">
                         <div class="card bg-light mb-3">
@@ -64,6 +65,9 @@
                         </div>
                     </div>
                 @endforeach
+            @else
+                <p style="font-size: x-large">No Community</p>
+            @endif
             </div>
             <div class="d-flex justify-content-center">
                 {{ $contents->links() }}
