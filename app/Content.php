@@ -8,7 +8,8 @@ class Content extends Model
 {
     protected $fillable = ['user_id', 'name', 'created_at'];
 
-    public function posts() {
+    public function posts()
+    {
         return $this->hasMany('App\Post');
     }
     public function user()
