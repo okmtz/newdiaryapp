@@ -20,9 +20,7 @@ class MemoController extends Controller
         ]);
         $post = Post::findOrFail($params['post_id']);
         $post->memos()->create($params);
-        $memos = Memo::where('post_id', $params['post_id'])->get();
-        $post = Post::findOrFail($params['post_id']);
-        return view('posts.show', compact('post','memos'));
+        return redirect()->action('PostController@show', $params['post_id']);
 
     }
     //
